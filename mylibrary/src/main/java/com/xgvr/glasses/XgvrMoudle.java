@@ -204,8 +204,8 @@ public class XgvrMoudle {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if (XgvrMoudle.getInstance().xgvr_hmd_is_present() == 0) {
-                    while (!stop) {
+                while (!stop) {
+                    if (XgvrMoudle.getInstance().xgvr_hmd_is_present() == 0) {
                         long s = System.currentTimeMillis();
                         lock.lock();
                         date = xgvr_hmd_data_get();
@@ -215,8 +215,6 @@ public class XgvrMoudle {
                             Log.d("shuang", "startGetDate COST =" + e);
                         }
                     }
-                } else {
-                    Log.d("shuang", "startGetDate: fail");
                 }
             }
         }).start();
